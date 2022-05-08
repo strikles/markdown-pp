@@ -110,8 +110,8 @@ class LaTeXRender(Module):
                    "Accept": "text/plain"}
 
         # Make the request
-        with closing(HTTPConnection("https://math.vercel.app")) as conn:
-            conn.request("POST", "", params, headers)
+        with closing(HTTPConnection("https://math.vercel.app", 80)) as conn:
+            conn.request("POST", "/", params, headers)
             response = conn.getresponse()
             img_url = response.read()
 
