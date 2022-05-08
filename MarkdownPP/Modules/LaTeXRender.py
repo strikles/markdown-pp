@@ -101,7 +101,7 @@ class LaTeXRender(Module):
         formula = formula.replace("$", "")
         display_formula = formula.replace("\n", "")
         # Display as Markdown image
-        img_url = "https://math.vercel.app?{}".format(urlencode({"from": display_formula})
+        img_url = "https://math.vercel.app?{}".format(urlencode({"from": display_formula}))
         requests.get(img_url)
         rendered_tex = '<p align="center" width="100%"><img src="{}.svg"></p>'.format(img_url)
         return rendered_tex
