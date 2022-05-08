@@ -102,18 +102,16 @@ class LaTeXRender(Module):
         display_formula = formula.replace("\n", "")
         print('Rendering: %s ...' % display_formula)
 
-        # Prepare POST request to QuickLaTeX via ProblemSetMarmoset
-        # (for added processing)
         params = urlencode({
-            'engine': 'quicklatex',
-            'input': encoded_formula,
+            'bgcolor': 'auto',
+            'from': encoded_formula,
         })
         headers = {"Content-type": "application/x-www-form-urlencoded",
                    "Accept": "text/plain"}
 
         # Make the request
-        with closing(HTTPConnection("www.problemsetmarmoset.com")) as conn:
-            conn.request("POST", "/latex/render.php", params, headers)
+        with closing(HTTPConnection("https://math.vercel.app")) as conn:
+            conn.request("POST", "", params, headers)
             response = conn.getresponse()
             img_url = response.read()
 
