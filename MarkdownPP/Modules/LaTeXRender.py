@@ -98,24 +98,8 @@ class LaTeXRender(Module):
     def render(self, formula):
         # Prepare the formula
         formula = formula.replace("$", "")
-        encoded_formula = formula.replace("%", "[comment]").replace("+", "%2B")
         display_formula = formula.replace("\n", "")
-        print('Rendering: %s ...' % display_formula)
-
-        params = urlencode({
-            'bgcolor': 'auto',
-            'from': encoded_formula,
-        })
-        headers = {"Content-type": "application/x-www-form-urlencoded",
-                   "Accept": "text/plain"}
-
-        # Make the request
-        with closing(HTTPConnection("math.vercel.app", 80)) as conn:
-            conn.request("POST", "/", params, headers)
-            response = conn.getresponse()
-            img_url = response.read()
-
+        params = urlencode({'from': display_formula})
         # Display as Markdown image
-        rendered_tex = '![{0}]({1} "{0}")\n'.format(display_formula,
-                                                    img_url.decode('utf-8'))
+        rendered_tex = "![](" + "https://math.vercel.app/{}".format(params) + ")"
         return rendered_tex
