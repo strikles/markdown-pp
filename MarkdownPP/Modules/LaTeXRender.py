@@ -101,5 +101,5 @@ class LaTeXRender(Module):
         display_formula = formula.replace("\n", "")
         params = urlencode({'from': display_formula})
         # Display as Markdown image
-        rendered_tex = "![](" + "https://math.vercel.app/{}".format(params) + ")"
+        rendered_tex = "![](" + "https://math.vercel.app?{}".format(params) + ")"
         return rendered_tex
