@@ -99,7 +99,6 @@ class LaTeXRender(Module):
         # Prepare the formula
         formula = formula.replace("$", "")
         display_formula = formula.replace("\n", "")
-        params = urlencode({'from': display_formula})
         # Display as Markdown image
-        rendered_tex = "![](" + "https://math.vercel.app?{}".format(params) + ")"
+        rendered_tex = "<p align='center' width='100%'><img src='https://math.vercel.app?from={}'></p>".format(display_formula)
         return rendered_tex
